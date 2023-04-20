@@ -170,3 +170,23 @@ LIMIT 1;
 UPDATE productos
 SET categoria = 'Electrónica y computación'
 WHERE categoria = @masRepetido;
+
+alter table productos
+add column stock INT;
+
+UPDATE productos
+SET stock = 
+	CASE
+         WHEN SKU = 11 THEN 10
+         WHEN SKU = 12 THEN 15
+         WHEN SKU = 13 THEN 12
+         WHEN SKU = 14 THEN 6
+         WHEN SKU = 15 THEN 24
+         WHEN SKU = 16 THEN 11
+         WHEN SKU = 17 THEN 14        
+         WHEN SKU = 18 THEN 35
+         WHEN SKU = 19 THEN 23
+         WHEN SKU = 20 THEN 21
+	END
+WHERE SKU IN (11,12,13,14,15,16,17,18,19,20);
+
