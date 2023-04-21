@@ -1,6 +1,5 @@
-CREATE DATABASE sprintfinal;
-
 -- MySQL Workbench Forward Engineering
+Create database sprintfinal;
 USE SPRINTFINAL;
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -14,10 +13,10 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema SprintFinal
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `SprintFinal` DEFAULT CHARACTER SET utf8 ;
-USE `SprintFinal` ;
+USE `SprintFinal`;
 
 -- -----------------------------------------------------
--- Table `SprintFinal`.`Proveedores`
+-- Creamos la tabla proveedores
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SprintFinal`.`Proveedores` (
   `id_proveedor` INT NOT NULL AUTO_INCREMENT,
@@ -34,7 +33,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SprintFinal`.`Clientes`
+-- Creamos la tabla clientes
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SprintFinal`.`Clientes` (
   `id_clientes` INT NOT NULL AUTO_INCREMENT,
@@ -46,7 +45,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SprintFinal`.`Productos`
+-- Creamos la tabla productos
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SprintFinal`.`Productos` (
   `SKU` INT NOT NULL AUTO_INCREMENT,
@@ -54,12 +53,13 @@ CREATE TABLE IF NOT EXISTS `SprintFinal`.`Productos` (
   `categoria` VARCHAR(100) NOT NULL,
   `proveedor` VARCHAR(45) NOT NULL,
   `color` VARCHAR(45) NOT NULL,
+  `stock` int,
   PRIMARY KEY (`SKU`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SprintFinal`.`Proveedores_productos`
+-- Creamos la tabla Proveedores-Productos (al tener una relación n:n) tabla productos
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SprintFinal`.`Proveedores_productos` (
   `Proveedores_id_proveedor` INT NOT NULL,
@@ -85,7 +85,7 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Data for table `SprintFinal`.`Proveedores`
+-- Insertamos datos en proveedores
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `SprintFinal`;
@@ -98,7 +98,7 @@ INSERT INTO `SprintFinal`.`Proveedores` (`representante_legal`, `nombre_corporat
 COMMIT;
 
 -- -----------------------------------------------------
--- Data for table `SprintFinal`.`Clientes`
+-- Insertamos datos en clientes
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `SprintFinal`;
@@ -111,33 +111,33 @@ INSERT INTO `SprintFinal`.`Clientes` (`nombre`, `apellido`, `direccion`) VALUES 
 COMMIT;
 
 -- -----------------------------------------------------
--- Data for table `SprintFinal`.`Productos`
+-- Insertamos datos en los productos
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `SprintFinal`;
-INSERT INTO `SprintFinal`.`Productos` (`precio`, `categoria`, `proveedor`, `color`) VALUES (1567900, 'Electrónica', 'Electrónica Chile', 'Rojo');
-INSERT INTO `SprintFinal`.`Productos` (`precio`, `categoria`, `proveedor`, `color`) VALUES (2456800, 'Electrónica', 'Electrocom', 'Verde');
-INSERT INTO `SprintFinal`.`Productos` (`precio`, `categoria`, `proveedor`, `color`) VALUES (3199000, 'Electrónica', 'Electrónica Chile', 'Azul');
-INSERT INTO `SprintFinal`.`Productos` (`precio`, `categoria`, `proveedor`, `color`) VALUES (499000, 'Electrónica', 'Electrónica Chile', 'Rojo');
-INSERT INTO `SprintFinal`.`Productos` (`precio`, `categoria`, `proveedor`, `color`) VALUES (1289000, 'Electrónica', 'Electrónica Chile', 'Verde');
-INSERT INTO `SprintFinal`.`Productos` (`precio`, `categoria`, `proveedor`, `color`) VALUES (776000, 'Electrónica', 'Electrocom', 'Rojo');
-INSERT INTO `SprintFinal`.`Productos` (`precio`, `categoria`, `proveedor`, `color`) VALUES (1950000, 'Muebles', 'Eléctrica S.A.', 'Azul');
-INSERT INTO `SprintFinal`.`Productos` (`precio`, `categoria`, `proveedor`, `color`) VALUES (860000, 'Electrónica', 'Electrónica del sur', 'Verde');
-INSERT INTO `SprintFinal`.`Productos` (`precio`, `categoria`, `proveedor`, `color`) VALUES (1398000, 'Hogar', 'Electrosat', 'Rojo');
-INSERT INTO `SprintFinal`.`Productos` (`precio`, `categoria`, `proveedor`, `color`) VALUES (509000, 'Electrónica', 'Electrocom', 'Azul');
+INSERT INTO `SprintFinal`.`Productos` (`precio`, `categoria`, `proveedor`, `color`,`stock`) VALUES (1567900, 'Electrónica', 'Electrónica Chile', 'Rojo','10');
+INSERT INTO `SprintFinal`.`Productos` (`precio`, `categoria`, `proveedor`, `color`,`stock`) VALUES (2456800, 'Electrónica', 'Electrocom', 'Verde','15');
+INSERT INTO `SprintFinal`.`Productos` (`precio`, `categoria`, `proveedor`, `color`,`stock`) VALUES (3199000, 'Electrónica', 'Electrónica Chile', 'Azul','12');
+INSERT INTO `SprintFinal`.`Productos` (`precio`, `categoria`, `proveedor`, `color`,`stock`) VALUES (499000, 'Electrónica', 'Electrónica Chile', 'Rojo','6');
+INSERT INTO `SprintFinal`.`Productos` (`precio`, `categoria`, `proveedor`, `color`,`stock`) VALUES (1289000, 'Electrónica', 'Electrónica Chile', 'Verde','24');
+INSERT INTO `SprintFinal`.`Productos` (`precio`, `categoria`, `proveedor`, `color`,`stock`) VALUES (776000, 'Electrónica', 'Electrocom', 'Rojo','11');
+INSERT INTO `SprintFinal`.`Productos` (`precio`, `categoria`, `proveedor`, `color`,`stock`) VALUES (1950000, 'Muebles', 'Eléctrica S.A.', 'Azul','14');
+INSERT INTO `SprintFinal`.`Productos` (`precio`, `categoria`, `proveedor`, `color`,`stock`) VALUES (860000, 'Electrónica', 'Electrónica del sur', 'Verde','35');
+INSERT INTO `SprintFinal`.`Productos` (`precio`, `categoria`, `proveedor`, `color`,`stock`) VALUES (1398000, 'Hogar', 'Electrosat', 'Rojo','23');
+INSERT INTO `SprintFinal`.`Productos` (`precio`, `categoria`, `proveedor`, `color`,`stock`) VALUES (509000, 'Electrónica', 'Electrocom', 'Azul','21');
 
 COMMIT;
-
-select * from productos;
-
+-- Cuál es la categoría de productos que más se repite.
 SELECT categoria, COUNT(categoria) AS repetidas
 FROM productos
 GROUP BY categoria
 ORDER BY repetidas DESC
 LIMIT 0,1;
 
-select * from productos;
+-- Cuáles son los productos con mayor stock
+SELECT SKU, STOCK FROM PRODUCTOS ORDER BY STOCK DESC;
 
+-- Qué color de producto es más común en nuestra tienda.
 SELECT color, COUNT(color) AS repetidas
 FROM productos
 GROUP BY color
@@ -145,48 +145,17 @@ ORDER BY repetidas DESC
 LIMIT 0,1;
 
 
-SELECT categoria 
-    FROM productos
-    GROUP BY categoria
-    ORDER BY COUNT(*) DESC;
-
-UPDATE productos
-SET categoria = 'Electrónica y computación'
-WHERE categoria = (
-    SELECT categoria 
-    FROM productos as prod
-    GROUP BY categoria
-    ORDER BY COUNT(*) DESC
-);
-
-
+-- Cambiamos la categoría más popular por 'Electrónica y computación'
 SELECT categoria INTO @masRepetido
 FROM productos
 GROUP BY categoria
 ORDER BY COUNT(*) DESC
 LIMIT 1;
 
-
 UPDATE productos
 SET categoria = 'Electrónica y computación'
 WHERE categoria = @masRepetido;
 
-alter table productos
-add column stock INT;
-
-UPDATE productos
-SET stock = 
-	CASE
-         WHEN SKU = 11 THEN 10
-         WHEN SKU = 12 THEN 15
-         WHEN SKU = 13 THEN 12
-         WHEN SKU = 14 THEN 6
-         WHEN SKU = 15 THEN 24
-         WHEN SKU = 16 THEN 11
-         WHEN SKU = 17 THEN 14        
-         WHEN SKU = 18 THEN 35
-         WHEN SKU = 19 THEN 23
-         WHEN SKU = 20 THEN 21
-	END
-WHERE SKU IN (11,12,13,14,15,16,17,18,19,20);
-
+-- Cual o cuales son los proveedores con menor stock de productos. (¿Qué Stock?)
+SELECT proveedor,stock FROM productos
+ORDER BY stock ASC;
